@@ -1,0 +1,253 @@
+/* PettyPawn landing, in Lamplight: The Park's lawn at night, the app's own look since 2026-10-25
+   (PettyPawn/docs/product/hoodblitz-design.md → Lamplight). The lawn's deep green gradient, warm pools of lamplight,
+   green cards and frames, Chalk text, Tennis Ball for every action, Cone for the stake. Sedgwick Ave Display for headings,
+   Sedgwick Ave for spoken lines, Anton for labels and buttons, Barlow for body. Gradients only: no images behind the
+   sections, nothing animated but the reveal and the story's WRONG. landing. */
+
+@font-face { font-family: 'Sedgwick Ave Display'; src: url('assets/fonts/SedgwickAveDisplay-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Sedgwick Ave'; src: url('assets/fonts/SedgwickAve-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Anton'; src: url('assets/fonts/Anton-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+
+:root {
+  /* The lawn (src/theme.ts: LAWN, LAMPLIGHT). */
+  --lawn-top: #0A1A12;
+  --lawn: #0E251A;
+  --lawn-low: #12301F;
+  --panel: #10291C;
+  --raised: #1A3A29;
+  --border: #274C34;
+  --night: #08140E;
+  --lamp: 255, 227, 154;
+
+  --chalk: #F7F7F2;
+  --muted: #A9C3B3;
+  --ink: #0F0F10;
+  --ball: #D4FF2B;
+  --ball-pale: #ECFF9C;
+  --ball-pressed: #BFE81F;
+  --cone: #FF6A00;
+
+  --display: 'Sedgwick Ave Display', 'Marker Felt', 'Comic Sans MS', cursive;
+  --voice: 'Sedgwick Ave', 'Marker Felt', cursive;
+  --label: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+
+  --gutter: clamp(16px, 5vw, 72px);
+  --measure: 34rem;
+  --wide: 1280px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--lawn); }
+body {
+  margin: 0;
+  background: var(--lawn);
+  color: var(--chalk);
+  font-family: var(--body);
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+main { overflow-x: clip; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, p, figure { margin: 0; }
+::selection { background: var(--ball); color: var(--ink); }
+
+/* Content stays within a readable width; the lawn behind it runs edge to edge. */
+.hero, .chill, .wanted { padding-inline: max(var(--gutter), calc((100% - var(--wide)) / 2)); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--label); letter-spacing: 1px; text-transform: uppercase;
+  background: var(--ball); color: var(--ink);
+  border-radius: 12px; padding: 12px 20px; font-size: 16px; line-height: 1;
+  transition: background .15s ease, transform .15s ease;
+}
+.btn:hover { background: var(--ball-pale); }
+.btn:active { background: var(--ball-pressed); transform: translateY(1px); }
+.btn-small { padding: 10px 16px; font-size: 15px; }
+
+.stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.stores-center { justify-content: center; }
+.store {
+  display: flex; flex-direction: column; justify-content: center;
+  min-width: 184px; min-height: 60px; padding: 10px 20px 11px;
+  background: var(--ball); color: var(--ink);
+  border-radius: 12px;
+  box-shadow: 0 12px 34px rgba(212, 255, 43, .14);
+  transition: background .15s ease, transform .15s ease;
+}
+.store:hover { background: var(--ball-pale); }
+.store:active { background: var(--ball-pressed); transform: translateY(1px); }
+.store-kicker { font-family: var(--body); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .72; }
+.store-name { font-family: var(--label); font-size: 24px; line-height: 1.1; letter-spacing: .5px; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px var(--gutter);
+  background: linear-gradient(180deg, rgba(10, 26, 18, .95), rgba(10, 26, 18, 0));
+  pointer-events: none;
+}
+.nav > * { pointer-events: auto; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 40px; height: 40px; border-radius: 10px; }
+.brand-name { font-family: var(--display); font-size: 26px; line-height: 1.25; color: var(--chalk); white-space: nowrap; }
+
+/* ---------- Hook: the lawn at night, a lamp just off the top left, another over the battle ---------- */
+.hero {
+  position: relative; min-height: 100svh;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center;
+  gap: clamp(32px, 5vw, 80px);
+  padding-top: 112px; padding-bottom: 80px;
+  background:
+    radial-gradient(62% 58% at 4% 0%, rgba(var(--lamp), .17), rgba(var(--lamp), .07) 42%, rgba(var(--lamp), 0) 75%),
+    radial-gradient(34% 56% at 75% 52%, rgba(var(--lamp), .12), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 76%),
+    linear-gradient(180deg, var(--lawn-top), var(--lawn));
+}
+.hero-copy { max-width: 40rem; }
+.title {
+  font-family: var(--display); font-weight: 400; letter-spacing: 0; text-wrap: balance;
+  font-size: clamp(46px, 5.4vw, 86px); line-height: 1.16; color: var(--chalk);
+}
+.sprayed { position: relative; display: inline-block; white-space: nowrap; color: var(--ball); text-shadow: 0 0 42px rgba(212, 255, 43, .16); }
+.spray { position: absolute; left: -2%; right: -4%; bottom: -.08em; width: 106%; height: .3em; }
+.support { margin-top: 28px; max-width: var(--measure); font-size: clamp(18px, 1.45vw, 22px); line-height: 1.55; color: var(--chalk); text-wrap: pretty; }
+.welcome { display: block; font-weight: 700; }
+/* The dare that closes a paragraph: graffiti, in Cone. */
+.stake, .heat { display: block; margin-top: 14px; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.3vw, 36px); line-height: 1.2; color: var(--cone); }
+
+/* ---------- Story: the arrival, and what you find, under its own lamp ---------- */
+.arrival {
+  display: flex; flex-direction: column; align-items: center; gap: 40px;
+  padding: clamp(72px, 9vw, 128px) var(--gutter);
+  background:
+    radial-gradient(38% 52% at 50% 60%, rgba(var(--lamp), .13), rgba(var(--lamp), .045) 48%, rgba(var(--lamp), 0) 76%),
+    var(--lawn);
+}
+.story { max-width: 40rem; text-align: center; }
+.story p, .story span { text-wrap: balance; }
+.story-set { font-size: clamp(19px, 1.6vw, 24px); line-height: 1.55; color: var(--chalk); }
+.story-ask { display: block; margin-top: 10px; }
+/* WRONG.: the slap, in Cone, landing a beat after the setup. */
+.story-wrong {
+  margin-top: 6px; font-family: var(--display); font-size: clamp(80px, 10vw, 150px); line-height: 1.15; color: var(--cone);
+  transform: rotate(-4deg); text-shadow: 0 0 60px rgba(255, 106, 0, .22);
+}
+.reveal.in .story-wrong { animation: slam .4s cubic-bezier(.2, .9, .3, 1.25) .6s both; }
+@keyframes slam { from { opacity: 0; transform: scale(1.9) rotate(-12deg); } to { opacity: 1; transform: rotate(-4deg); } }
+.story-turn { margin-top: 4px; font-family: var(--voice); font-size: clamp(30px, 3.4vw, 50px); line-height: 1.2; color: var(--ball); }
+
+.phone {
+  width: min(100%, 330px); aspect-ratio: 9 / 19.5; flex: none;
+  border-radius: 40px; padding: 10px;
+  background: var(--night); border: 2px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .25);
+}
+/* The battle sits under the hero's right-hand lamp, never taller than the screen leaves room for. */
+.hero .phone { justify-self: center; width: clamp(240px, calc((100svh - 190px) * 9 / 19.5), 320px); }
+.arrival .phone { width: min(100%, 300px); }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 30px; overflow: hidden; background: var(--lawn); }
+.clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- The game: the walk-out under a lamp on the left, the loop beside it ---------- */
+.chill {
+  display: grid; grid-template-columns: 320px minmax(0, 1fr); align-items: center;
+  gap: clamp(40px, 7vw, 120px);
+  padding-top: clamp(72px, 9vw, 140px); padding-bottom: clamp(72px, 9vw, 140px);
+  background:
+    radial-gradient(40% 58% at 12% 50%, rgba(var(--lamp), .12), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 76%),
+    var(--lawn);
+}
+.chill .phone { grid-column: 1; grid-row: 1; width: 320px; }
+.chill-copy { grid-column: 2; grid-row: 1; }
+
+/* ---------- Ambition: lamplight from the right, onto The Board ---------- */
+.wanted {
+  display: grid; grid-template-columns: minmax(0, 1fr) 320px; align-items: center;
+  gap: clamp(40px, 7vw, 120px);
+  padding-top: clamp(72px, 9vw, 140px); padding-bottom: clamp(72px, 9vw, 140px);
+  background:
+    radial-gradient(40% 58% at 88% 50%, rgba(var(--lamp), .12), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 76%),
+    linear-gradient(180deg, var(--lawn), var(--lawn-low));
+}
+.wanted .phone { width: 320px; }
+.heading { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.6vw, 72px); line-height: 1.2; }
+.heading span { display: block; }
+.heading .hot { color: var(--ball); }
+.prose { margin-top: 24px; max-width: var(--measure); font-size: clamp(18px, 1.35vw, 21px); line-height: 1.6; color: var(--chalk); }
+
+/* ---------- Call to action: a lamp overhead, the night beyond ---------- */
+.closer {
+  padding: clamp(88px, 11vw, 168px) var(--gutter);
+  text-align: center;
+  background:
+    radial-gradient(46% 58% at 50% 0%, rgba(var(--lamp), .16), rgba(var(--lamp), .05) 48%, rgba(var(--lamp), 0) 78%),
+    linear-gradient(180deg, var(--lawn-low), var(--lawn-top));
+}
+.closer-inner { max-width: 52rem; margin: 0 auto; }
+.closer-mark { width: 104px; height: 104px; border-radius: 24px; margin: 0 auto 32px; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); }
+.closer-line { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 4.4vw, 68px); line-height: 1.2; }
+.closer .stores { margin-top: 40px; }
+
+/* ---------- Footer ---------- */
+.foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 28px var(--gutter) 40px;
+  border-top: 1px solid var(--border); background: var(--night);
+  font-size: 14px; color: var(--muted);
+}
+.foot-name { font-family: var(--display); font-size: 22px; color: var(--chalk); }
+.foot-links { display: flex; gap: 20px; font-family: var(--label); letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
+.foot-links a:hover { color: var(--ball); }
+
+/* ---------- Reveal ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal.in .story-wrong { animation: none; }
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr; min-height: auto; padding-top: 84px; gap: 28px;
+    background:
+      radial-gradient(90% 40% at 10% 0%, rgba(var(--lamp), .17), rgba(var(--lamp), .06) 45%, rgba(var(--lamp), 0) 78%),
+      linear-gradient(180deg, var(--lawn-top), var(--lawn));
+  }
+  .title { font-size: clamp(42px, 11.6vw, 68px); }
+  .arrival { background: radial-gradient(80% 45% at 50% 62%, rgba(var(--lamp), .13), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 80%), var(--lawn); }
+  .wanted {
+    grid-template-columns: 1fr; justify-items: center;
+    background:
+      radial-gradient(80% 38% at 70% 74%, rgba(var(--lamp), .12), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 80%),
+      linear-gradient(180deg, var(--lawn), var(--lawn-low));
+  }
+  .wanted-copy { justify-self: stretch; }
+  .chill {
+    grid-template-columns: 1fr; justify-items: center;
+    background: radial-gradient(80% 38% at 30% 74%, rgba(var(--lamp), .12), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 80%), var(--lawn);
+  }
+  .chill .phone { grid-column: 1; grid-row: 2; }
+  .chill-copy { grid-column: 1; grid-row: 1; justify-self: stretch; }
+  .phone, .hero .phone, .arrival .phone, .chill .phone, .wanted .phone { width: min(100%, 290px); }
+}
+@media (max-width: 480px) {
+  .nav { padding: 10px 16px; }
+  .brand-mark { width: 34px; height: 34px; }
+  .brand-name { font-size: 22px; }
+  .btn-small { padding: 9px 12px; font-size: 14px; }
+  .stores { flex-wrap: nowrap; gap: 10px; }
+  .store { flex: 1 1 0; min-width: 0; padding: 10px 14px; }
+  .store-name { font-size: 20px; }
+  .store-kicker { font-size: 10px; }
+}
