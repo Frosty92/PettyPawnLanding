@@ -1,0 +1,12 @@
+# Cloudflare Pages project for pettypawn.com: the landing page and its waitlist API (functions/).
+# deploy.sh assembles site/ (the page and its assets), functions/ and this file in a temporary folder and deploys from
+# there, so capture/, brand/ and the README are never uploaded.
+name = "pettypawn-landing"
+pages_build_output_dir = "site"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pettypawn-waitlist"
+database_id = "8ceffac8-50b6-435f-8cce-cc79b5c184bb"
+migrations_dir = "migrations"

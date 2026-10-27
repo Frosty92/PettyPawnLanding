@@ -14,7 +14,7 @@ Static page: `index.html`, `styles.css`, `main.js`, `assets/`. Serve it with the
 - **The stolen-pet still** (`assets/screens/pawned.jpg`, round four's YOU GOT PAWNED card) is no longer on the page and is kept for cleanup. `capture/pawned.mjs` re-captures the card from Studio → Result cards (`/studio-results?demo=1&you=zaki`), now titled WARLORD HAS STOLEN YOUR PET.
 - **The round-one fight** (`assets/video/fight.mp4`, `fight.jpg`, from `/studio-combat?demo=1` by `capture/demo.mjs`) is no longer on the page. It is kept for cleanup. Its walk-out still (`walkout.jpg`: BOTH PETS ARE ON THE LINE, frosty's Chihuahua against zaki's Doberman) is the No Chill section's picture.
 - **The Board** (`assets/screens/board.jpg`) is Studio's Most Wanted (`/studio-wall`), captured by `capture/board.mjs`.
-- **Store links:** every `a.store` has `href="#"`; set the real App Store and Google Play URLs there (two in the hero, two in the closer). The footer's Privacy, Terms and Support links are also `#`.
+- **The waitlist** (2026-10-27) replaces the store buttons until the listings exist: an email field over two buttons, JOIN THE WAITLIST ON iPhone / Android, in the hero and the closer, and the nav button reads Join the waitlist. `main.js` posts `{ email, platform, source }` to `/api/waitlist` (`functions/api/waitlist.js`), which stores it in the D1 database `pettypawn-waitlist` (table `waitlist`, `migrations/0001_waitlist.sql`) with one write: a new email answers "You're on the waitlist.", one already there "You're already on the waitlist.", and both forms on the page show the answer. `source` is `?utm_source=`, `?ref=` or the referring site; `country` comes from Cloudflare. A hidden field turns bots away. The lines are functional placeholders for the founder's veto. The footer's Privacy, Terms and Support links are still `#`.
 
 ## Re-recording
 
@@ -28,4 +28,10 @@ Static page: `index.html`, `styles.css`, `main.js`, `assets/`. Serve it with the
 
 ## Deploying
 
-Live on Cloudflare Pages, project `pettypawn-landing` (`pettypawn-landing.pages.dev`, custom domains `pettypawn.com` and `www.pettypawn.com`). Source: github.com/Frosty92/PettyPawnLanding. `./deploy.sh` uploads only `index.html`, `styles.css`, `main.js` and `assets/`; run it from an interactive terminal where `wrangler login` works. Pushing to GitHub does not deploy by itself.
+Live at https://pettypawn.com and https://www.pettypawn.com: Cloudflare Pages project `pettypawn-landing` (`pettypawn-landing.pages.dev`). Source: github.com/Frosty92/PettyPawnLanding.
+
+- `bash deploy.sh` (from a terminal where `wrangler login` works) assembles the page and its assets, `functions/` and `wrangler.toml` in a temporary folder and deploys from there, so `capture/`, `brand/` and this README are never uploaded. Pushing to GitHub does not deploy by itself.
+- `wrangler.toml` binds the D1 database `pettypawn-waitlist` as `DB`. A new migration goes in `migrations/` and is applied with `npx wrangler d1 migrations apply pettypawn-waitlist --remote`.
+- Read the list: `npx wrangler d1 execute pettypawn-waitlist --remote --command "SELECT * FROM waitlist ORDER BY created_at"`, or Workers & Pages → D1 → pettypawn-waitlist → Console in the dashboard.
+- DNS for pettypawn.com (2026-10-27): `@` and `www` are proxied CNAMEs to `pettypawn-landing.pages.dev`; mail goes to Google Workspace (MX `smtp.google.com` priority 1, SPF `v=spf1 include:_spf.google.com ~all`, DMARC `v=DMARC1; p=none`). Google's verification TXT and DKIM (`google._domainkey`) are added once Workspace gives their values.
+- The game server's PettyPawn config (`workers/spicy-chess-workers`, branch `pettypawn`, `wrangler.maidenless.production.json` and `wrangler.pettypawn.production.json`) still claims `pettypawn.com` as a custom domain. Before that server is deployed (launch checklist C12), change that entry to path routes for the legal pages (`pettypawn.com/terms*`, `/privacy*`, `/community*`, `/support*`, `/delete-account*`), or the deploy will collide with this site.

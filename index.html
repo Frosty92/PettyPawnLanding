@@ -20,7 +20,7 @@
     <img class="brand-mark" src="assets/brand/logo-tile.png" alt="" width="40" height="40">
     <span class="brand-name">PettyPawn</span>
   </a>
-  <a class="btn btn-small" href="#get">Get the app</a>
+  <a class="btn btn-small" href="#get">Join the waitlist</a>
 </header>
 
 <main id="top">
@@ -30,11 +30,19 @@
     <div class="hero-copy">
       <h1 class="title">The Most <span class="sprayed">Unhinged<svg class="spray" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 19 C 60 9, 120 25, 178 13 S 268 9, 296 15" fill="none" stroke="#D4FF2B" stroke-width="7" stroke-linecap="round"/><circle cx="292" cy="24" r="3" fill="#D4FF2B"/><path d="M231 16 q2 8 1 12" stroke="#D4FF2B" stroke-width="3" stroke-linecap="round" fill="none"/></svg></span> Chess Game Ever Made</h1>
       <p class="support"><span class="welcome">Welcome to Petty Pawn Park!</span> The players here will taunt you, smack you, &amp; steal your turn. They'll even steal your beloved pet. <span class="stake">Think you can hang?</span></p>
-      <div class="stores">
-        <!-- Replace href values with the real store listings. -->
-        <a class="store" href="#" data-store="apple"><span class="store-kicker">Download on the</span><span class="store-name">App Store</span></a>
-        <a class="store" href="#" data-store="google"><span class="store-kicker">Get it on</span><span class="store-name">Google Play</span></a>
-      </div>
+      <!-- The waitlist (main.js → functions/api/waitlist.js). The store buttons come back when the listings exist. -->
+      <form class="waitlist" novalidate>
+        <div class="waitlist-fields">
+          <input class="waitlist-email" type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
+          <input class="waitlist-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="stores">
+            <button class="store" type="button" data-platform="ios"><span class="store-kicker">Join the waitlist on</span><span class="store-name">iPhone</span></button>
+            <button class="store" type="button" data-platform="android"><span class="store-kicker">Join the waitlist on</span><span class="store-name">Android</span></button>
+          </div>
+        </div>
+        <p class="waitlist-done" tabindex="-1" hidden><span class="waitlist-done-line"></span><span class="waitlist-done-email"></span></p>
+        <p class="waitlist-note" role="status" aria-live="polite"></p>
+      </form>
     </div>
 
     <!-- The battle, filmed from the PettyPawn app (capture/battle.mjs): frosty's taunt arrives, zaki blocks a smack and lands one, and frosty's next one lands. -->
@@ -99,10 +107,18 @@
     <div class="closer-inner reveal">
       <img class="closer-mark" src="assets/brand/logo-tile.png" alt="" width="104" height="104">
       <h2 class="closer-line">The park is full of lunatics, and you're about to become one.</h2>
-      <div class="stores stores-center">
-        <a class="store" href="#" data-store="apple"><span class="store-kicker">Download on the</span><span class="store-name">App Store</span></a>
-        <a class="store" href="#" data-store="google"><span class="store-kicker">Get it on</span><span class="store-name">Google Play</span></a>
-      </div>
+      <form class="waitlist waitlist-center" novalidate>
+        <div class="waitlist-fields">
+          <input class="waitlist-email" type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
+          <input class="waitlist-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="stores">
+            <button class="store" type="button" data-platform="ios"><span class="store-kicker">Join the waitlist on</span><span class="store-name">iPhone</span></button>
+            <button class="store" type="button" data-platform="android"><span class="store-kicker">Join the waitlist on</span><span class="store-name">Android</span></button>
+          </div>
+        </div>
+        <p class="waitlist-done" tabindex="-1" hidden><span class="waitlist-done-line"></span><span class="waitlist-done-email"></span></p>
+        <p class="waitlist-note" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
