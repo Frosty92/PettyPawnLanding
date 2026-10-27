@@ -25,3 +25,7 @@ Static page: `index.html`, `styles.css`, `main.js`, `assets/`. Serve it with the
 5. `"$SCRATCH/sheet" "$SCRATCH/fight.txt" out.jpg 0.5` lays a take out as a contact sheet.
 
 `?snap=story|no-chill|most-wanted|get` shows that section at the top of the page, for headless screenshots.
+
+## Deploying
+
+Live on Cloudflare Pages, project `pettypawn-landing` (`pettypawn-landing.pages.dev`, custom domains `pettypawn.com` and `www.pettypawn.com`). Source: github.com/Frosty92/PettyPawnLanding. `./deploy.sh` uploads only `index.html`, `styles.css`, `main.js` and `assets/`; run it from an interactive terminal where `wrangler login` works. Pushing to GitHub does not deploy by itself.
