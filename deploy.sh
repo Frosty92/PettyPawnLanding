@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Deploys the landing page and its waitlist API to Cloudflare Pages (project pettypawn-landing, served on pettypawn.com).
+# SUPERSEDED 2026-10-27: the Pages project is connected to GitHub and builds build.sh on every push to main, and a
+# Git-connected project takes no direct uploads. Kept only for cleanup.
+# Deployed the landing page and its waitlist API to Cloudflare Pages (project pettypawn-landing, served on pettypawn.com).
 # It assembles site/ (the page and its assets), functions/ and wrangler.toml in a temporary folder and deploys from there,
 # so capture/, brand/ and the README are never uploaded. Run it with `bash deploy.sh` from a terminal where `wrangler login`
 # has been done.
