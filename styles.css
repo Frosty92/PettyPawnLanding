@@ -196,29 +196,66 @@ h1, h2, p, figure { margin: 0; }
 .closer-line { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 4.4vw, 68px); line-height: 1.2; }
 .closer .stores { margin-top: 40px; }
 
-/* ---------- The waitlist: an email, then iPhone or Android, in the store buttons' place ---------- */
-.waitlist { width: min(100%, 420px); margin-top: 34px; }
-.waitlist-center { margin: 40px auto 0; text-align: center; }
+/* ---------- The waitlist: one field and one button in a single bar, then where it's coming ---------- */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.waitlist { width: min(100%, 470px); margin-top: 34px; }
+.waitlist-center { margin: 40px auto 0; }
+.waitlist-row {
+  display: flex; align-items: stretch; gap: 6px;
+  padding: 6px; border-radius: 16px;
+  background: var(--panel); border: 2px solid var(--border);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .3);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.waitlist-row:focus-within { border-color: var(--ball); box-shadow: 0 18px 44px rgba(0, 0, 0, .3), 0 0 0 4px rgba(212, 255, 43, .12); }
+.waitlist-row.is-invalid { border-color: var(--cone); box-shadow: 0 18px 44px rgba(0, 0, 0, .3), 0 0 0 4px rgba(255, 106, 0, .14); }
+.waitlist-row[hidden] { display: none; }
+/* A zero base width keeps the input's built-in width from stretching the hero on phones; it grows into the space left. */
 .waitlist-email {
-  display: block; width: 100%; min-height: 56px; padding: 0 18px;
+  flex: 1 1 0; width: 0; min-width: 0; min-height: 54px; padding: 0 14px;
   font-family: var(--body); font-weight: 600; font-size: 18px; color: var(--chalk);
-  background: var(--panel); border: 2px solid var(--border); border-radius: 12px;
-  outline: none; transition: border-color .15s ease;
+  background: transparent; border: 0; border-radius: 10px; outline: none;
 }
 .waitlist-email::placeholder { color: var(--muted); opacity: 1; }
-.waitlist-email:focus { border-color: var(--ball); }
-.waitlist-email[aria-invalid="true"] { border-color: var(--cone); }
+.waitlist-join {
+  flex: none; padding: 0 22px; border: 0; border-radius: 11px;
+  font-family: var(--label); font-size: 18px; line-height: 1; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;
+  background: var(--ball); color: var(--ink); cursor: pointer;
+  box-shadow: 0 10px 28px rgba(212, 255, 43, .18);
+  transition: background .15s ease, transform .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.waitlist-join:hover { background: var(--ball-pale); }
+.waitlist-join:active { background: var(--ball-pressed); transform: translateY(1px); }
+.waitlist-join:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
+.waitlist-join:disabled { opacity: .65; cursor: progress; }
 .waitlist-trap { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
-.waitlist .stores, .closer .waitlist .stores { margin-top: 12px; flex-wrap: nowrap; }
-.waitlist .store { flex: 1 1 0; min-width: 0; text-align: left; }
-button.store { border: 0; font: inherit; color: var(--ink); cursor: pointer; -webkit-tap-highlight-color: transparent; }
-button.store:focus-visible { outline: 3px solid var(--chalk); outline-offset: 3px; }
-button.store:disabled { opacity: .6; cursor: progress; }
-.waitlist-note { min-height: 1.5em; margin-top: 12px; font-size: 15px; color: var(--muted); }
-.waitlist-note.is-error { color: var(--cone); }
+.waitlist-note { margin-top: 10px; font-size: 15px; color: var(--cone); }
+.waitlist-note:empty { margin-top: 0; }
 .waitlist-done { outline: none; }
 .waitlist-done-line { display: block; font-family: var(--display); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.25; color: var(--ball); }
 .waitlist-done-email { display: block; margin-top: 6px; font-size: 16px; color: var(--muted); overflow-wrap: anywhere; }
+.waitlist-center .waitlist-done, .waitlist-center .waitlist-note { text-align: center; }
+
+/* Coming soon to Apple / Android, each with its mark, in Chalk. */
+.soon { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 18px; }
+.waitlist-center .soon { justify-content: center; }
+.soon-label { font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.soon-os { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; font-size: 17px; line-height: 1; color: var(--chalk); }
+.soon-mark { flex: none; fill: currentColor; }
+.soon-apple { width: 19px; height: 19px; margin-top: -3px; }
+.soon-android { width: 23px; height: 23px; margin-top: -2px; }
+.soon-slash { font-size: 17px; line-height: 1; color: var(--muted); opacity: .55; }
+
+@media (max-width: 480px) {
+  .waitlist-row { padding: 5px; gap: 5px; }
+  .waitlist-email { padding: 0 10px; font-size: 16px; min-height: 50px; }
+  .waitlist-join { padding: 0 14px; font-size: 16px; }
+}
+@media (max-width: 340px) {
+  .waitlist-row { flex-direction: column; }
+  .waitlist-join { min-height: 48px; }
+}
 
 /* ---------- Footer ---------- */
 .foot {

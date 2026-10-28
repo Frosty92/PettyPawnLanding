@@ -1,5 +1,6 @@
 // POST /api/waitlist: puts an email on the PettyPawn waitlist (D1 database pettypawn-waitlist, bound as DB).
-// Body: { email, platform: 'ios' | 'android', source?, website? (a hidden field only bots fill) }.
+// Body: { email, platform?: 'ios' | 'android' (the device the page was opened on), source?, trap? (a hidden field
+// only bots fill) }.
 // One write per signup: the email is the table's primary key, so ON CONFLICT DO NOTHING tells a new signup
 // ({ status: 'joined' }, 201) from one already on the list ({ status: 'already' }, 200) without a second query.
 // Errors: { error } with 400, 403, 405, 413 or 500.
@@ -33,18 +34,18 @@ export async function onRequest({ request, env }) {
   if (!body || typeof body !== 'object') return reply({ error: 'bad_request' }, 400);
 
   // A bot that fills the hidden field gets the answer a person would, and nothing is stored.
-  if (body.website) return reply({ status: 'joined' }, 201);
+  if (body.trap) return reply({ status: 'joined' }, 201);
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
   if (email.length > 254 || !EMAIL.test(email)) return reply({ error: 'invalid_email' }, 400);
-  if (!PLATFORMS.has(body.platform)) return reply({ error: 'invalid_platform' }, 400);
+  const platform = PLATFORMS.has(body.platform) ? body.platform : null;
   const source = typeof body.source === 'string' && body.source.trim() ? body.source.trim().slice(0, 64) : null;
   const country = typeof request.cf?.country === 'string' ? request.cf.country : null;
 
   try {
     const { meta } = await env.DB
       .prepare('INSERT INTO waitlist (email, platform, source, country) VALUES (?1, ?2, ?3, ?4) ON CONFLICT (email) DO NOTHING')
-      .bind(email, body.platform, source, country)
+      .bind(email, platform, source, country)
       .run();
     return meta.changes > 0 ? reply({ status: 'joined' }, 201) : reply({ status: 'already' });
   } catch (err) {

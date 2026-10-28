@@ -32,9 +32,10 @@
   for (const sib of document.querySelector('main').children) { if (sib === el) break; sib.style.display = 'none'; }
 })();
 
-// The waitlist: an email and a tap on iPhone or Android, stored by /api/waitlist (functions/api/waitlist.js), which
-// answers "joined" for a new email and "already" for one on the list. Both forms show the answer, so the closer does not
-// ask again once the hero has one. Enter picks the phone the visitor is on, or asks which on a computer.
+// The waitlist: an email and JOIN THE WAITLIST, stored by /api/waitlist (functions/api/waitlist.js), which answers
+// "joined" for a new email and "already" for one on the list. Both forms show the answer, so the closer does not ask
+// again once the hero has one. Nothing asks which phone: the page sends the one the visitor is on (iPhone or Android,
+// nothing on a computer), so TestFlight and Play invitations can go to the right people.
 (() => {
   const forms = [...document.querySelectorAll('form.waitlist')];
   if (!forms.length) return;
@@ -43,11 +44,10 @@
     joined: "You're on the waitlist.",
     already: "You're already on the waitlist.",
     invalid: 'Enter a valid email.',
-    platform: 'Tap iPhone or Android.',
     failed: 'Something went wrong. Try again.',
   };
   const ua = navigator.userAgent;
-  const onPhone = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios'
+  const platform = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios'
     : /Android/.test(ua) ? 'android' : null;
   const params = new URLSearchParams(location.search);
   let source = params.get('utm_source') || params.get('ref') || '';
@@ -59,7 +59,7 @@
     forms.forEach((f) => {
       f.querySelector('.waitlist-done-line').textContent = LINES[status];
       f.querySelector('.waitlist-done-email').textContent = email;
-      f.querySelector('.waitlist-fields').hidden = true;
+      f.querySelector('.waitlist-row').hidden = true;
       f.querySelector('.waitlist-note').textContent = '';
       f.querySelector('.waitlist-done').hidden = false;
     });
@@ -67,41 +67,42 @@
   };
 
   forms.forEach((form) => {
+    const row = form.querySelector('.waitlist-row');
     const input = form.querySelector('.waitlist-email');
+    const button = form.querySelector('.waitlist-join');
     const note = form.querySelector('.waitlist-note');
-    const buttons = form.querySelectorAll('[data-platform]');
-    const say = (line, error) => { note.textContent = line || ''; note.classList.toggle('is-error', Boolean(error)); };
-    const invalid = () => { input.setAttribute('aria-invalid', 'true'); say(LINES.invalid, true); input.focus(); };
+    const say = (line) => { note.textContent = line || ''; };
+    const invalid = (on) => {
+      row.classList.toggle('is-invalid', on);
+      if (on) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+    };
 
-    const send = async (platform) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (button.disabled) return;
       const email = input.value.trim().toLowerCase();
-      if (!EMAIL.test(email)) return invalid();
-      input.removeAttribute('aria-invalid');
-      if (!platform) return say(LINES.platform, true);
-      buttons.forEach((b) => { b.disabled = true; });
-      form.setAttribute('aria-busy', 'true');
+      if (!EMAIL.test(email)) { invalid(true); say(LINES.invalid); input.focus(); return; }
+      invalid(false);
       say('');
+      button.disabled = true;
+      form.setAttribute('aria-busy', 'true');
       try {
         const res = await fetch('/api/waitlist', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ email, platform, source, website: form.querySelector('.waitlist-trap').value }),
+          body: JSON.stringify({ email, platform, source, trap: form.querySelector('.waitlist-trap').value }),
         });
         const data = await res.json().catch(() => ({}));
-        if (data.status === 'joined' || data.status === 'already') return finish(data.status, email, form);
-        if (data.error === 'invalid_email') return invalid();
-        say(LINES.failed, true);
-      } catch (e) {
-        say(LINES.failed, true);
+        if (data.status === 'joined' || data.status === 'already') { finish(data.status, email, form); return; }
+        if (data.error === 'invalid_email') { invalid(true); say(LINES.invalid); return; }
+        say(LINES.failed);
+      } catch (err) {
+        say(LINES.failed);
       } finally {
-        buttons.forEach((b) => { b.disabled = false; });
+        button.disabled = false;
         form.removeAttribute('aria-busy');
       }
-    };
-
-    buttons.forEach((b) => b.addEventListener('click', () => send(b.dataset.platform)));
-    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); send(onPhone); } });
-    input.addEventListener('input', () => { if (input.hasAttribute('aria-invalid')) { input.removeAttribute('aria-invalid'); say(''); } });
-    form.addEventListener('submit', (e) => e.preventDefault());
+    });
+    input.addEventListener('input', () => { if (row.classList.contains('is-invalid')) { invalid(false); say(''); } });
   });
 })();

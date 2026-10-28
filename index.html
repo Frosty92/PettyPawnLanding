@@ -15,12 +15,19 @@
 </head>
 <body>
 
+<!-- The Apple and Android marks: Ionicons 7.4.0 logo-apple and logo-android. Ionicons, Copyright (c) 2015-present Ionic
+     (http://ionic.io/), MIT License. -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="mark-apple" viewBox="0 0 512 512"><path d="M349.13 136.86c-40.32 0-57.36 19.24-85.44 19.24-28.79 0-50.75-19.1-85.69-19.1-34.2 0-70.67 20.88-93.83 56.45-32.52 50.16-27 144.63 25.67 225.11 18.84 28.81 44 61.12 77 61.47h.6c28.68 0 37.2-18.78 76.67-19h.6c38.88 0 46.68 18.89 75.24 18.89h.6c33-.35 59.51-36.15 78.35-64.85 13.56-20.64 18.6-31 29-54.35-76.19-28.92-88.43-136.93-13.08-178.34-23-28.8-55.32-45.48-85.79-45.48z"/><path d="M340.25 32c-24 1.63-52 16.91-68.4 36.86-14.88 18.08-27.12 44.9-22.32 70.91h1.92c25.56 0 51.72-15.39 67-35.11 14.72-18.77 25.88-45.37 21.8-72.66z"/></symbol>
+  <symbol id="mark-android" viewBox="0 0 512 512"><path d="M380.91 199l42.47-73.57a8.63 8.63 0 00-3.12-11.76 8.52 8.52 0 00-11.71 3.12l-43 74.52c-32.83-15-69.78-23.35-109.52-23.35s-76.69 8.36-109.52 23.35l-43-74.52a8.6 8.6 0 10-14.88 8.64L131 199C57.8 238.64 8.19 312.77 0 399.55h512c-8.19-86.78-57.8-160.91-131.09-200.55zM138.45 327.65a21.46 21.46 0 1121.46-21.46 21.47 21.47 0 01-21.46 21.46zm235 0A21.46 21.46 0 11395 306.19a21.47 21.47 0 01-21.51 21.46z"/></symbol>
+</svg>
+
 <header class="nav">
   <a class="brand" href="#top" aria-label="PettyPawn, home">
     <img class="brand-mark" src="assets/brand/logo-tile.png" alt="" width="40" height="40">
     <span class="brand-name">PettyPawn</span>
   </a>
-  <a class="btn btn-small" href="#get">Join the waitlist</a>
+  <a class="btn btn-small" href="#get">Join The Waitlist</a>
 </header>
 
 <main id="top">
@@ -32,16 +39,19 @@
       <p class="support"><span class="welcome">Welcome to Petty Pawn Park!</span> The players here will taunt you, smack you, &amp; steal your turn. They'll even steal your beloved pet. <span class="stake">Think you can hang?</span></p>
       <!-- The waitlist (main.js → functions/api/waitlist.js). The store buttons come back when the listings exist. -->
       <form class="waitlist" novalidate>
-        <div class="waitlist-fields">
+        <div class="waitlist-row">
           <input class="waitlist-email" type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
-          <input class="waitlist-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="stores">
-            <button class="store" type="button" data-platform="ios"><span class="store-kicker">Join the waitlist on</span><span class="store-name">iPhone</span></button>
-            <button class="store" type="button" data-platform="android"><span class="store-kicker">Join the waitlist on</span><span class="store-name">Android</span></button>
-          </div>
+          <button class="waitlist-join" type="submit">Join The Waitlist</button>
         </div>
+        <input class="waitlist-trap" type="text" name="pp_extra" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="waitlist-done" tabindex="-1" hidden><span class="waitlist-done-line"></span><span class="waitlist-done-email"></span></p>
         <p class="waitlist-note" role="status" aria-live="polite"></p>
+        <p class="soon">
+          <span class="soon-label">Coming soon to</span>
+          <span class="soon-os"><svg class="soon-mark soon-apple" aria-hidden="true"><use href="#mark-apple"/></svg>Apple</span>
+          <span class="soon-slash">/</span>
+          <span class="soon-os"><svg class="soon-mark soon-android" aria-hidden="true"><use href="#mark-android"/></svg>Android</span>
+        </p>
       </form>
     </div>
 
@@ -108,16 +118,19 @@
       <img class="closer-mark" src="assets/brand/logo-tile.png" alt="" width="104" height="104">
       <h2 class="closer-line">The park is full of lunatics, and you're about to become one.</h2>
       <form class="waitlist waitlist-center" novalidate>
-        <div class="waitlist-fields">
+        <div class="waitlist-row">
           <input class="waitlist-email" type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
-          <input class="waitlist-trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="stores">
-            <button class="store" type="button" data-platform="ios"><span class="store-kicker">Join the waitlist on</span><span class="store-name">iPhone</span></button>
-            <button class="store" type="button" data-platform="android"><span class="store-kicker">Join the waitlist on</span><span class="store-name">Android</span></button>
-          </div>
+          <button class="waitlist-join" type="submit">Join The Waitlist</button>
         </div>
+        <input class="waitlist-trap" type="text" name="pp_extra" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="waitlist-done" tabindex="-1" hidden><span class="waitlist-done-line"></span><span class="waitlist-done-email"></span></p>
         <p class="waitlist-note" role="status" aria-live="polite"></p>
+        <p class="soon">
+          <span class="soon-label">Coming soon to</span>
+          <span class="soon-os"><svg class="soon-mark soon-apple" aria-hidden="true"><use href="#mark-apple"/></svg>Apple</span>
+          <span class="soon-slash">/</span>
+          <span class="soon-os"><svg class="soon-mark soon-android" aria-hidden="true"><use href="#mark-android"/></svg>Android</span>
+        </p>
       </form>
     </div>
   </section>
