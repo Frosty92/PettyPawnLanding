@@ -11,6 +11,7 @@
   <meta name="theme-color" content="#0A1A12">
   <link rel="icon" href="assets/brand/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/Archivo-Black.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -55,7 +56,8 @@
       </form>
     </div>
 
-    <!-- The battle, filmed from the PettyPawn app (capture/battle.mjs): frosty's taunt arrives, zaki blocks a smack and lands one, and frosty's next one lands. -->
+    <!-- The battle, filmed from the PettyPawn app (capture/battle.mjs): frosty's taunt arrives, zaki blocks a smack and lands one, and frosty's next one lands.
+         zaki's pet is a Golden with puppy eyes, frosty's a white Persian (founder, 2026-10-27). -->
     <div class="phone">
       <div class="screen">
         <video class="clip" muted autoplay loop playsinline preload="auto" poster="assets/video/battle.jpg"
@@ -78,7 +80,7 @@
         <!-- How the battle ends, filmed from the PettyPawn app (capture/fall.mjs): frosty's smack empties zaki's bar,
              frosty steals zaki's turn and mates, and the card as the app shows it. It plays from the start as it comes into view. -->
         <video class="clip" muted loop playsinline preload="metadata" poster="assets/video/fall.jpg"
-          aria-label="The same game ends: frosty's smack empties zaki's health, frosty steals zaki's turn and checkmates, and the card reads FROSTY HAS STOLEN YOUR PET. over zaki's shocked Doberman.">
+          aria-label="The same game ends: frosty's smack empties zaki's health, frosty steals zaki's turn and checkmates, and the card reads FROSTY HAS STOLEN YOUR PET. over zaki's shocked Golden.">
           <source src="assets/video/fall.mp4" type="video/mp4">
         </video>
       </div>
@@ -89,12 +91,14 @@
   <section class="chill" id="no-chill">
     <div class="chill-copy reveal">
       <h2 class="heading"><span>PettyPawn is chess</span> <span class="hot">with No Chill.</span></h2>
-      <p class="prose">Real chess, real rules, against other players who have no intention of being polite. Win games, stack coins, and when you've saved enough, play The Petty Match: beat someone and you take their pet. Now you've started a grudge. They want their beloved pet back, and there are only two ways to get it: beat you in The Petty Rematch, or pay you the ransom. Yikes. Be warned, though. The more pets you steal, the more enemies you make. <span class="heat">Can you handle the heat?</span></p>
+      <!-- The founder's words, unchanged; split in two on 2026-10-27, the match names highlighted, the stakes in Cone. -->
+      <p class="prose"><span class="lead">Real chess, real rules, against other players who have no intention of being polite.</span> Win games, stack coins, and when you've saved enough, play <mark class="hi">The Petty Match</mark>: beat someone and <strong>you take their pet.</strong></p>
+      <p class="prose">Now you've started a grudge. They want their beloved pet back, and there are only two ways to get it: beat you in <mark class="hi">The Petty Rematch</mark>, or <strong>pay you the ransom</strong>. Yikes. Be warned, though. <strong class="warn">The more pets you steal, the more enemies you make.</strong> <span class="heat">Can you handle the heat?</span></p>
     </div>
     <div class="phone reveal">
       <div class="screen">
-        <!-- The Petty Match walk-out, from the PettyPawn app (capture/demo.mjs): both pets on the line before the first move. -->
-        <img class="clip" src="assets/video/walkout.jpg" alt="The Petty Match walk-out in PettyPawn: frosty's Chihuahua and zaki's Doberman, both marked ON THE LINE, and the line One of these pets changes hands." width="780" height="1688" loading="lazy">
+        <!-- The Petty Match walk-out, from the PettyPawn app (capture/walkout.mjs): both pets on the line before the first move. -->
+        <img class="clip" src="assets/video/walkout.jpg" alt="The Petty Match walk-out in PettyPawn: frosty's white Persian and zaki's Golden, both marked ON THE LINE, and the line One of these pets changes hands." width="780" height="1688" loading="lazy">
       </div>
     </div>
   </section>
@@ -103,7 +107,7 @@
   <section class="wanted" id="most-wanted">
     <div class="wanted-copy reveal">
       <h2 class="heading"><span>Steal pets.</span> <span>Get famous.</span> <span class="hot">Make the Most Wanted list.</span></h2>
-      <p class="prose">Every pet you steal climbs you up the leaderboard. The top 20 players in the park are officially Most Wanted. Be the one everyone's hunting.</p>
+      <p class="prose">Every pet you steal climbs you up the leaderboard. The top 20 players in the park are officially <mark class="hi">Most Wanted</mark>. Be the one everyone's hunting.</p>
     </div>
     <div class="phone reveal">
       <div class="screen">

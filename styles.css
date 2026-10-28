@@ -1,11 +1,13 @@
 /* PettyPawn landing, in Lamplight: The Park's lawn at night, the app's own look since 2026-10-25
    (PettyPawn/docs/product/hoodblitz-design.md → Lamplight). The lawn's deep green gradient, warm pools of lamplight,
-   green cards and frames, Chalk text, Tennis Ball for every action, Cone for the stake. Sedgwick Ave Display for headings,
-   Sedgwick Ave for spoken lines, Anton for labels and buttons, Barlow for body. Gradients only: no images behind the
-   sections, nothing animated but the reveal and the story's WRONG. landing. */
+   green cards and frames, Chalk text, Tennis Ball for every action, Cone for the stake. Archivo Black for headings
+   (the founder dropped the graffiti face on 2026-10-27: sleeker, modern, sharp), its expanded cut for the name and
+   WRONG., Anton for labels and buttons, Barlow for body. Gradients only: no images behind the sections, nothing animated
+   but the reveal and the story's WRONG. landing. */
 
-@font-face { font-family: 'Sedgwick Ave Display'; src: url('assets/fonts/SedgwickAveDisplay-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Sedgwick Ave'; src: url('assets/fonts/SedgwickAve-Regular.ttf') format('truetype'); font-display: swap; }
+/* Archivo at weight 900, two widths: the normal cut for headings, the 125% cut for the name and WRONG. (OFL). */
+@font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-Black.woff2') format('woff2'); font-weight: 900; font-stretch: 100%; font-display: swap; }
+@font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-ExpandedBlack.woff2') format('woff2'); font-weight: 900; font-stretch: 125%; font-display: swap; }
 @font-face { font-family: 'Anton'; src: url('assets/fonts/Anton-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
@@ -30,8 +32,7 @@
   --ball-pressed: #BFE81F;
   --cone: #FF6A00;
 
-  --display: 'Sedgwick Ave Display', 'Marker Felt', 'Comic Sans MS', cursive;
-  --voice: 'Sedgwick Ave', 'Marker Felt', cursive;
+  --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --label: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
   --body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
 
@@ -98,7 +99,7 @@ h1, h2, p, figure { margin: 0; }
 .nav > * { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-mark { width: 40px; height: 40px; border-radius: 10px; }
-.brand-name { font-family: var(--display); font-size: 26px; line-height: 1.25; color: var(--chalk); white-space: nowrap; }
+.brand-name { font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: 19px; letter-spacing: -.01em; line-height: 1.25; color: var(--chalk); white-space: nowrap; }
 
 /* ---------- Hook: the lawn at night, a lamp just off the top left, another over the battle ---------- */
 .hero {
@@ -113,15 +114,15 @@ h1, h2, p, figure { margin: 0; }
 }
 .hero-copy { max-width: 40rem; }
 .title {
-  font-family: var(--display); font-weight: 400; letter-spacing: 0; text-wrap: balance;
-  font-size: clamp(46px, 5.4vw, 86px); line-height: 1.16; color: var(--chalk);
+  font-family: var(--display); font-weight: 900; letter-spacing: -.02em; text-wrap: balance;
+  font-size: clamp(40px, 4.7vw, 66px); line-height: 1.04; color: var(--chalk);
 }
 .sprayed { position: relative; display: inline-block; white-space: nowrap; color: var(--ball); text-shadow: 0 0 42px rgba(212, 255, 43, .16); }
 .spray { position: absolute; left: -2%; right: -4%; bottom: -.08em; width: 106%; height: .3em; }
 .support { margin-top: 28px; max-width: var(--measure); font-size: clamp(18px, 1.45vw, 22px); line-height: 1.55; color: var(--chalk); text-wrap: pretty; }
 .welcome { display: block; font-weight: 700; }
-/* The dare that closes a paragraph: graffiti, in Cone. */
-.stake, .heat { display: block; margin-top: 14px; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.3vw, 36px); line-height: 1.2; color: var(--cone); }
+/* The dare that closes a paragraph: display type, in Cone. */
+.stake, .heat { display: block; margin-top: 16px; font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2vw, 30px); line-height: 1.15; letter-spacing: -.01em; color: var(--cone); }
 
 /* ---------- Story: the arrival, and what you find, under its own lamp ---------- */
 .arrival {
@@ -137,12 +138,12 @@ h1, h2, p, figure { margin: 0; }
 .story-ask { display: block; margin-top: 10px; }
 /* WRONG.: the slap, in Cone, landing a beat after the setup. */
 .story-wrong {
-  margin-top: 6px; font-family: var(--display); font-size: clamp(80px, 10vw, 150px); line-height: 1.15; color: var(--cone);
+  margin-top: 10px; font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: clamp(64px, 8.4vw, 124px); line-height: 1.05; letter-spacing: -.01em; color: var(--cone);
   transform: rotate(-4deg); text-shadow: 0 0 60px rgba(255, 106, 0, .22);
 }
 .reveal.in .story-wrong { animation: slam .4s cubic-bezier(.2, .9, .3, 1.25) .6s both; }
 @keyframes slam { from { opacity: 0; transform: scale(1.9) rotate(-12deg); } to { opacity: 1; transform: rotate(-4deg); } }
-.story-turn { margin-top: 4px; font-family: var(--voice); font-size: clamp(30px, 3.4vw, 50px); line-height: 1.2; color: var(--ball); }
+.story-turn { margin-top: 10px; font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.5vw, 36px); line-height: 1.15; letter-spacing: -.01em; color: var(--ball); }
 
 .phone {
   width: min(100%, 330px); aspect-ratio: 9 / 19.5; flex: none;
@@ -178,10 +179,22 @@ h1, h2, p, figure { margin: 0; }
     linear-gradient(180deg, var(--lawn), var(--lawn-low));
 }
 .wanted .phone { width: 320px; }
-.heading { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.6vw, 72px); line-height: 1.2; }
+.heading { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 3.9vw, 56px); line-height: 1.06; letter-spacing: -.02em; }
 .heading span { display: block; }
 .heading .hot { color: var(--ball); }
 .prose { margin-top: 24px; max-width: var(--measure); font-size: clamp(18px, 1.35vw, 21px); line-height: 1.6; color: var(--chalk); }
+.prose + .prose { margin-top: 18px; }
+/* The opening line of a section's story, bigger and bold. */
+.lead { display: block; margin-bottom: 10px; font-weight: 700; font-size: 1.14em; line-height: 1.4; }
+/* A highlighter stroke over the names that matter: Tennis Ball behind Ink. */
+.hi {
+  background: var(--ball); color: var(--ink); font-weight: 700;
+  padding: .03em .3em .06em; margin: 0 .04em; border-radius: 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+/* The stake, in Cone; the warning, in bold Chalk. */
+.prose strong { font-weight: 700; color: var(--cone); }
+.prose .warn { color: var(--chalk); }
 
 /* ---------- Call to action: a lamp overhead, the night beyond ---------- */
 .closer {
@@ -193,12 +206,14 @@ h1, h2, p, figure { margin: 0; }
 }
 .closer-inner { max-width: 52rem; margin: 0 auto; }
 .closer-mark { width: 104px; height: 104px; border-radius: 24px; margin: 0 auto 32px; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); }
-.closer-line { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 4.4vw, 68px); line-height: 1.2; }
+.closer-line { font-family: var(--display); font-weight: 900; font-size: clamp(30px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
 .closer .stores { margin-top: 40px; }
 
-/* ---------- The waitlist: one field and one button in a single bar, then where it's coming ---------- */
+/* ---------- The waitlist: one field and one button in a single bar, then where it's coming ----------
+   The bar is as wide as the copy (the founder, 2026-10-27: the field was too short for an email), and on phones the
+   button sits under the field, full width. */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-.waitlist { width: min(100%, 470px); margin-top: 34px; }
+.waitlist { width: min(100%, 640px); margin-top: 34px; }
 .waitlist-center { margin: 40px auto 0; }
 .waitlist-row {
   display: flex; align-items: stretch; gap: 6px;
@@ -212,13 +227,13 @@ h1, h2, p, figure { margin: 0; }
 .waitlist-row[hidden] { display: none; }
 /* A zero base width keeps the input's built-in width from stretching the hero on phones; it grows into the space left. */
 .waitlist-email {
-  flex: 1 1 0; width: 0; min-width: 0; min-height: 54px; padding: 0 14px;
-  font-family: var(--body); font-weight: 600; font-size: 18px; color: var(--chalk);
+  flex: 1 1 0; width: 0; min-width: 0; min-height: 58px; padding: 0 18px;
+  font-family: var(--body); font-weight: 600; font-size: 19px; color: var(--chalk);
   background: transparent; border: 0; border-radius: 10px; outline: none;
 }
 .waitlist-email::placeholder { color: var(--muted); opacity: 1; }
 .waitlist-join {
-  flex: none; padding: 0 22px; border: 0; border-radius: 11px;
+  flex: none; padding: 0 26px; border: 0; border-radius: 11px;
   font-family: var(--label); font-size: 18px; line-height: 1; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;
   background: var(--ball); color: var(--ink); cursor: pointer;
   box-shadow: 0 10px 28px rgba(212, 255, 43, .18);
@@ -233,7 +248,7 @@ h1, h2, p, figure { margin: 0; }
 .waitlist-note { margin-top: 10px; font-size: 15px; color: var(--cone); }
 .waitlist-note:empty { margin-top: 0; }
 .waitlist-done { outline: none; }
-.waitlist-done-line { display: block; font-family: var(--display); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.25; color: var(--ball); }
+.waitlist-done-line { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(24px, 2.3vw, 32px); line-height: 1.15; letter-spacing: -.015em; color: var(--ball); }
 .waitlist-done-email { display: block; margin-top: 6px; font-size: 16px; color: var(--muted); overflow-wrap: anywhere; }
 .waitlist-center .waitlist-done, .waitlist-center .waitlist-note { text-align: center; }
 
@@ -247,14 +262,11 @@ h1, h2, p, figure { margin: 0; }
 .soon-android { width: 23px; height: 23px; margin-top: -2px; }
 .soon-slash { font-size: 17px; line-height: 1; color: var(--muted); opacity: .55; }
 
-@media (max-width: 480px) {
-  .waitlist-row { padding: 5px; gap: 5px; }
-  .waitlist-email { padding: 0 10px; font-size: 16px; min-height: 50px; }
-  .waitlist-join { padding: 0 14px; font-size: 16px; }
-}
-@media (max-width: 340px) {
-  .waitlist-row { flex-direction: column; }
-  .waitlist-join { min-height: 48px; }
+/* Phones: the field on its own line, the button under it, both full width. The field stays at 17px so iOS doesn't zoom. */
+@media (max-width: 640px) {
+  .waitlist-row { flex-direction: column; gap: 6px; }
+  .waitlist-email { flex: none; width: auto; min-height: 54px; padding: 0 16px; font-size: 17px; text-align: center; }
+  .waitlist-join { min-height: 54px; padding: 0 20px; font-size: 18px; }
 }
 
 /* ---------- Footer ---------- */
@@ -264,7 +276,7 @@ h1, h2, p, figure { margin: 0; }
   border-top: 1px solid var(--border); background: var(--night);
   font-size: 14px; color: var(--muted);
 }
-.foot-name { font-family: var(--display); font-size: 22px; color: var(--chalk); }
+.foot-name { font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: 17px; letter-spacing: -.01em; color: var(--chalk); }
 .foot-links { display: flex; gap: 20px; font-family: var(--label); letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
 .foot-links a:hover { color: var(--ball); }
 
@@ -285,7 +297,7 @@ h1, h2, p, figure { margin: 0; }
       radial-gradient(90% 40% at 10% 0%, rgba(var(--lamp), .17), rgba(var(--lamp), .06) 45%, rgba(var(--lamp), 0) 78%),
       linear-gradient(180deg, var(--lawn-top), var(--lawn));
   }
-  .title { font-size: clamp(42px, 11.6vw, 68px); }
+  .title { font-size: clamp(36px, 10.6vw, 60px); }
   .arrival { background: radial-gradient(80% 45% at 50% 62%, rgba(var(--lamp), .13), rgba(var(--lamp), .04) 50%, rgba(var(--lamp), 0) 80%), var(--lawn); }
   .wanted {
     grid-template-columns: 1fr; justify-items: center;
@@ -307,6 +319,7 @@ h1, h2, p, figure { margin: 0; }
   .brand-mark { width: 34px; height: 34px; }
   .brand-name { font-size: 22px; }
   .btn-small { padding: 9px 12px; font-size: 14px; }
+  .heading { font-size: clamp(27px, 8vw, 34px); }
   .stores { flex-wrap: nowrap; gap: 10px; }
   .store { flex: 1 1 0; min-width: 0; padding: 10px 14px; }
   .store-name { font-size: 20px; }
