@@ -1,5 +1,5 @@
-// Reveal sections as they arrive, play the story's clip from its start once it is in view, and keep the clips still for
-// people who asked for less motion.
+// Reveal sections as they arrive, play the hero's clip while it is in view, and keep it still for people who asked for
+// less motion.
 (() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = document.querySelectorAll('.reveal');
@@ -14,7 +14,7 @@
 
   const clips = document.querySelectorAll('video.clip');
   if (reduce) { clips.forEach((clip) => { clip.removeAttribute('autoplay'); clip.pause(); clip.controls = true; }); return; }
-  // A clip plays while most of it is on screen and rests otherwise, so the story's starts from its first frame.
+  // A clip plays while most of it is on screen and rests otherwise.
   if (!('IntersectionObserver' in window)) { clips.forEach((v) => { v.autoplay = true; v.play().catch(() => {}); }); return; }
   const watch = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.intersectionRatio >= .4) e.target.play().catch(() => {}); else e.target.pause(); });

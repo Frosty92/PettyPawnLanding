@@ -1,8 +1,8 @@
-// The story's clip (founder, 2026-10-26; PettyPawn/docs/exec-plans/active/2026-10-25_pp-landing-page-and-demo-video.md):
-// the hero's Dragon a few moves on, and how it ends, from /studio-combat?demo=fall (PettyPawn/src/studio/demoFight.ts).
-// Both bars stand at 20. zaki plays Qe3; frosty plays Be6 and smacks, and it lands: zaki's health hits zero. frosty
-// steals zaki's turn and plays Rc1 for zaki, and Qxa2 is mate. The card: FROSTY HAS STOLEN YOUR PET. zaki's move is a
-// tap, shown by a fingertip; frosty's are scripted. Every beat is timed from the roll.
+// The story's clip (founder, 2026-10-26, updated 2026-11-04; PettyPawn/docs/exec-plans/active/2026-11-04_landing-demo-videos-round-two.md):
+// a Dragon near its end, and how it ends, from /studio-combat?demo=fall (PettyPawn/src/studio/demoFight.ts).
+// Both bars stand at 20. zaki plays Qe3; frosty plays Be6 and smacks, and it lands: zaki's health hits zero, KO. frosty
+// steals zaki's turn and plays Rc1 for zaki, and Qxa2 is mate. CHECKMATE, then the game-over card: PET SNATCHED over zaki's shocked
+// Corgi. zaki's move is a tap, shown by a fingertip; frosty's are scripted. Every beat is timed from the roll.
 import { take, poster, shot, sleep } from './take.mjs';
 import { showTouches, moveBy, learnBoard } from './finger.mjs';
 
@@ -23,7 +23,7 @@ const { list } = await take('fall', '/studio-combat?demo=fall', async (app) => {
   await at(0.2); await moveBy(app, 'd2', 'e3'); mark('20.Qe3');
   await at(2.0); await step(app, "theirMove('d7','e6')");               // 20...Be6, eyeing a2
   await at(2.5); await step(app, 'strikeYou()');                         // it lands: zaki's bar is empty
-  await sleep(1500); await DEBUG(app, '1-broken');
+  await sleep(1500); await DEBUG(app, '1-ko');
   await at(5.2); await step(app, "theirMove('d1','c1')");               // the stolen turn: 21.Rc1, walling in zaki's king
   await sleep(600); await DEBUG(app, '2-stolen');
   await at(6.4); await step(app, "theirMate('a5','a2')");               // 21...Qxa2#, with its result
@@ -31,5 +31,5 @@ const { list } = await take('fall', '/studio-combat?demo=fall', async (app) => {
   await at(CUT); await DEBUG(app, '4-card'); app.camera.cut();
   console.log('end', await app.eval('JSON.stringify(window.__demo.health())'));
 });
-poster('fall', list, 0.1);                                           // the first frame: the clip starts from it in view
+poster('fall', list, 4.0);                                               // the KO: the board thrown, the steal opening
 console.log('frames', list.length, 'seconds', (list.length / 30).toFixed(1));

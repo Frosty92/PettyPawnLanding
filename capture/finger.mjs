@@ -67,6 +67,34 @@ export async function learnBoard(app) {
 }
 const square = async (app, sq) => board?.[sq] ?? find(app, `${sq}, `);
 
+/** A finger rubbing Pigeon Poop off a square: pressed, back and forth across it for `ms`, released. */
+export async function rubOff(app, sq, ms = 1500, reach = 62) {
+  const c = await square(app, sq), from = { x: c.x - reach, y: c.y + 8 };
+  await app.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: from.x + 16, y: from.y + 64 });
+  await app.eval('window.__finger && window.__finger.show()');
+  await glide(app, { x: from.x + 16, y: from.y + 64 }, from, 220);
+  await app.send('Input.dispatchMouseEvent', { type: 'mousePressed', x: from.x, y: from.y, button: 'left', buttons: 1, clickCount: 1 });
+  const start = Date.now();
+  while (Date.now() - start < ms) {
+    const k = (Date.now() - start) / 340;
+    await app.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: c.x - reach * Math.cos(k * Math.PI), y: c.y + 8 + 10 * Math.sin(k * Math.PI * .5), button: 'left', buttons: 1 });
+    await sleep(14);
+  }
+  await app.send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: c.x, y: c.y + 8, button: 'left', buttons: 0, clickCount: 1 });
+}
+
+/** The fingertip goes to the mosquito where it is, taps it, and the recorder's step makes sure of the swat: it never stops moving. */
+export async function swatMosquito(app) {
+  const p = await app.where('Swat the mosquito');
+  if (p) {
+    await app.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: p.x + 16, y: p.y + 64 });
+    await app.eval('window.__finger && window.__finger.show()');
+    await glide(app, { x: p.x + 16, y: p.y + 64 }, p, 140);
+    await app.tap(p.x, p.y, 90);
+  }
+  await app.eval('window.__demo.swat()');
+}
+
 /** A move as a player makes it: tap the piece, see its squares, glide to the target with the finger still up, tap it. */
 export async function moveBy(app, from, to, { look = 260, slide = 320 } = {}) {
   const a = await square(app, from), b = await square(app, to);
