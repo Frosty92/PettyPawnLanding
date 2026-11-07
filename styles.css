@@ -2,7 +2,7 @@
    (PettyPawn/docs/product/hoodblitz-design.md → Lamplight). The lawn's deep green gradient, warm pools of lamplight,
    green cards and frames, Chalk text, Tennis Ball for every action, Cone for the stake. Archivo Black for headings
    (the founder dropped the graffiti face on 2026-10-27: sleeker, modern, sharp), its expanded cut for the footer's name, Anton for
-   labels and buttons, Barlow for body. Sedgwick Ave, the old graffiti family's thinner cut, for the name beside the logo and nothing else (founder, 2026-11-06).
+   labels and buttons, Baloo 2 for all other text (Barlow until 2026-11-07). Sedgwick Ave, the old graffiti family's thinner cut, for the name beside the logo and nothing else (founder, 2026-11-06).
    Gradients only: no images behind the sections, nothing animated but the reveal and Yikes! landing. */
 
 /* The name beside the logo (OFL). */
@@ -11,9 +11,8 @@
 @font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-Black.woff2') format('woff2'); font-weight: 900; font-stretch: 100%; font-display: swap; }
 @font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-ExpandedBlack.woff2') format('woff2'); font-weight: 900; font-stretch: 125%; font-display: swap; }
 @font-face { font-family: 'Anton'; src: url('assets/fonts/Anton-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
-@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
-@font-face { font-family: 'Barlow'; src: url('assets/fonts/Barlow-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+/* The text font for the whole site (founder, 2026-11-07): Baloo 2, Latin, variable 400-800 (OFL). Lilita One was picked first and was too bold, with no lighter weight. */
+@font-face { font-family: 'Baloo 2'; src: url('assets/fonts/Baloo2-Latin.woff2') format('woff2'); font-weight: 400 800; font-display: swap; }
 
 :root {
   /* The lawn (src/theme.ts: LAWN, LAMPLIGHT). */
@@ -36,7 +35,7 @@
 
   --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --label: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
-  --body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Baloo 2', 'Helvetica Neue', Arial, sans-serif;
 
   --gutter: clamp(16px, 5vw, 72px);
   --measure: 34rem;
@@ -50,7 +49,7 @@ body {
   background: var(--lawn);
   color: var(--chalk);
   font-family: var(--body);
-  font-weight: 500;
+  font-weight: 500; font-synthesis: none;
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -305,7 +304,7 @@ h1, h2, p, figure { margin: 0; }
   .hero .phone { order: 2; }
   /* The words here are big, bold and centred under the clip (founder, 2026-11-06: "stale and timid"), with the taunting in Tennis Ball.
      The small top margin clears the welcome's tilt, which reaches above its box. */
-  .support { order: 3; margin-top: 8px; justify-self: center; font-size: clamp(21px, 5.9vw, 28px); font-weight: 600; line-height: 1.5; text-align: center; text-wrap: balance; }
+  .support { order: 3; margin-top: 8px; justify-self: center; font-size: clamp(23px, 6.4vw, 30px); font-weight: 500; line-height: 1.35; text-align: center; text-wrap: balance; }
   .welcome { margin-inline: auto; margin-bottom: 28px; transform-origin: center; font-size: clamp(28px, 7.8vw, 40px); line-height: 1.16; }
   .hit { font-weight: 700; color: var(--ball); }
   .stake { margin-top: 32px; font-size: clamp(25px, 7vw, 34px); line-height: 1.22; }
