@@ -281,7 +281,12 @@ h1, h2, p, figure { margin: 0; }
       radial-gradient(90% 40% at 10% 0%, rgba(var(--lamp), .17), rgba(var(--lamp), .06) 45%, rgba(var(--lamp), 0) 78%),
       linear-gradient(180deg, var(--lawn-top), var(--lawn));
   }
-  .title { font-size: clamp(36px, 10.6vw, 60px); }
+  /* One column: the title, centred, then the clip, then the words and the waitlist (founder, 2026-11-06). */
+  .hero-copy { display: contents; }
+  .title { order: 1; text-align: center; font-size: clamp(32px, 9.2vw, 52px); }
+  .hero .phone { order: 2; }
+  .support { order: 3; margin-top: 0; }
+  .waitlist { order: 4; margin-top: 0; }
   .wanted {
     grid-template-columns: 1fr; justify-items: center;
     background:
