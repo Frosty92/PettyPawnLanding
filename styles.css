@@ -1,10 +1,13 @@
 /* PettyPawn landing, in Lamplight: The Park's lawn at night, the app's own look since 2026-10-25
    (PettyPawn/docs/product/hoodblitz-design.md → Lamplight). The lawn's deep green gradient, warm pools of lamplight,
    green cards and frames, Chalk text, Tennis Ball for every action, Cone for the stake. Archivo Black for headings
-   (the founder dropped the graffiti face on 2026-10-27: sleeker, modern, sharp), its expanded cut for the name, Anton for
-   labels and buttons, Barlow for body. Gradients only: no images behind the sections, nothing animated but the reveal and Yikes! landing. */
+   (the founder dropped the graffiti face on 2026-10-27: sleeker, modern, sharp), its expanded cut for the footer's name, Anton for
+   labels and buttons, Barlow for body. Sedgwick Ave, the old graffiti family's thinner cut, for the name beside the logo and nothing else (founder, 2026-11-06).
+   Gradients only: no images behind the sections, nothing animated but the reveal and Yikes! landing. */
 
-/* Archivo at weight 900, two widths: the normal cut for headings, the 125% cut for the name (OFL). */
+/* The name beside the logo (OFL). */
+@font-face { font-family: 'Sedgwick Ave'; src: url('assets/fonts/SedgwickAve-Regular.ttf') format('truetype'); font-display: swap; }
+/* Archivo at weight 900, two widths: the normal cut for headings, the 125% cut for the footer's name (OFL). */
 @font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-Black.woff2') format('woff2'); font-weight: 900; font-stretch: 100%; font-display: swap; }
 @font-face { font-family: 'Archivo'; src: url('assets/fonts/Archivo-ExpandedBlack.woff2') format('woff2'); font-weight: 900; font-stretch: 125%; font-display: swap; }
 @font-face { font-family: 'Anton'; src: url('assets/fonts/Anton-Regular.ttf') format('truetype'); font-display: swap; }
@@ -98,7 +101,7 @@ h1, h2, p, figure { margin: 0; }
 .nav > * { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-mark { width: 40px; height: 40px; border-radius: 10px; }
-.brand-name { font-family: var(--display); font-weight: 900; font-stretch: 125%; font-size: 19px; letter-spacing: -.01em; line-height: 1.25; color: var(--chalk); white-space: nowrap; }
+.brand-name { position: relative; top: 2px; font-family: 'Sedgwick Ave', var(--display); font-weight: 400; font-size: 30px; line-height: 1.25; color: var(--chalk); white-space: nowrap; }
 
 /* ---------- Hook: the lawn at night, a lamp just off the top left, another over the battle ---------- */
 .hero {
@@ -161,11 +164,11 @@ h1, h2, p, figure { margin: 0; }
 .heading .hot { color: var(--ball); }
 .prose { margin-top: 24px; max-width: var(--measure); font-size: clamp(18px, 1.35vw, 21px); line-height: 1.6; color: var(--chalk); }
 .prose + .prose { margin-top: 18px; }
-/* The No Chill section's pop (founder, 2026-11-04): bold words in the heading's one accent, and Yikes! slapped on in its display face. */
+/* The No Chill section's pop (founder, 2026-11-04 and 11-06): bold words in the heading's accent, and Yikes! slapped on in Cone in its display face. */
 .pop { font-weight: 700; color: var(--ball); }
 .yikes {
   width: fit-content; margin-top: 20px; transform: rotate(-3deg); transform-origin: left center;
-  font-family: var(--display); font-weight: 900; font-size: clamp(38px, 4vw, 58px); line-height: 1.05; letter-spacing: -.02em; color: var(--ball);
+  font-family: var(--display); font-weight: 900; font-size: clamp(38px, 4vw, 58px); line-height: 1.05; letter-spacing: -.02em; color: var(--cone);
 }
 .yikes + .prose { margin-top: 18px; }
 .reveal.in .yikes { animation: slam .4s cubic-bezier(.2, .9, .3, 1.25) .6s both; }
@@ -297,7 +300,7 @@ h1, h2, p, figure { margin: 0; }
 @media (max-width: 480px) {
   .nav { padding: 10px 16px; }
   .brand-mark { width: 34px; height: 34px; }
-  .brand-name { font-size: 22px; }
+  .brand-name { font-size: clamp(23px, 7.2vw, 28px); }
   .btn-small { padding: 9px 12px; font-size: 14px; }
   .heading { font-size: clamp(27px, 8vw, 34px); }
   .stores { flex-wrap: nowrap; gap: 10px; }
