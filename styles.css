@@ -183,12 +183,12 @@ h1, h2, p, figure { margin: 0; }
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 
-/* The warning under Most Wanted (founder, 2026-11-06): Cone on the dark of a cone, the app's coneDark, as in a match's stake strip. */
+/* The warning under Most Wanted (founder, 2026-11-06): solid Cone with Ink words and icon, the way .hi is Tennis Ball with Ink. Orange on dark orange was hard to read. */
 .warning {
   display: flex; align-items: center; gap: 12px;
-  width: fit-content; max-width: var(--measure); margin-top: 24px; padding: 12px 16px;
-  background: #3A1800; border: 1.5px solid var(--cone); border-radius: 14px;
-  font-weight: 600; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.35; color: var(--cone);
+  width: fit-content; max-width: var(--measure); margin-top: 24px; padding: 13px 18px;
+  background: var(--cone); border-radius: 14px;
+  font-weight: 700; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.35; color: var(--ink);
 }
 .warning-icon { flex: none; width: 24px; height: 24px; }
 
@@ -307,6 +307,7 @@ h1, h2, p, figure { margin: 0; }
   .stake { margin-top: 32px; font-size: clamp(25px, 7vw, 34px); line-height: 1.22; }
   .hero .waitlist { order: 4; margin-top: 0; justify-self: center; }
   .hero .soon { justify-content: center; margin-top: 24px; }
+  .warning { text-wrap: balance; }
   .wanted {
     grid-template-columns: 1fr; justify-items: center;
     background:
