@@ -122,7 +122,11 @@ h1, h2, p, figure { margin: 0; }
 .sprayed { position: relative; display: inline-block; white-space: nowrap; color: var(--ball); text-shadow: 0 0 42px rgba(212, 255, 43, .16); }
 .spray { position: absolute; left: -2%; right: -4%; bottom: -.08em; width: 106%; height: .3em; }
 .support { margin-top: 28px; max-width: var(--measure); font-size: clamp(18px, 1.45vw, 22px); line-height: 1.55; color: var(--chalk); text-wrap: pretty; }
-.welcome { display: block; font-weight: 700; }
+/* The welcome, said at an angle in the page's primary pop (founder, 2026-11-06), the same tilt as Yikes!. */
+.welcome {
+  display: block; width: fit-content; margin-bottom: 14px; transform: rotate(-3deg); transform-origin: left center;
+  font-family: var(--display); font-weight: 900; font-size: clamp(26px, 2.2vw, 34px); line-height: 1.1; letter-spacing: -.015em; color: var(--ball);
+}
 /* The dare that closes the hero's paragraph: display type, in Cone. */
 .stake { display: block; margin-top: 16px; font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2vw, 30px); line-height: 1.15; letter-spacing: -.01em; color: var(--cone); }
 
@@ -170,7 +174,6 @@ h1, h2, p, figure { margin: 0; }
   width: fit-content; margin-top: 20px; transform: rotate(-3deg); transform-origin: left center;
   font-family: var(--display); font-weight: 900; font-size: clamp(38px, 4vw, 58px); line-height: 1.05; letter-spacing: -.02em; color: var(--cone);
 }
-.yikes + .prose { margin-top: 18px; }
 .reveal.in .yikes { animation: slam .4s cubic-bezier(.2, .9, .3, 1.25) .6s both; }
 @keyframes slam { from { opacity: 0; transform: scale(1.9) rotate(-10deg); } to { opacity: 1; transform: rotate(-3deg); } }
 /* A highlighter stroke over the names that matter: Tennis Ball behind Ink. */
@@ -179,6 +182,15 @@ h1, h2, p, figure { margin: 0; }
   padding: .03em .3em .06em; margin: 0 .04em; border-radius: 6px;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
+
+/* The warning under Most Wanted (founder, 2026-11-06): Cone on the dark of a cone, the app's coneDark, as in a match's stake strip. */
+.warning {
+  display: flex; align-items: center; gap: 12px;
+  width: fit-content; max-width: var(--measure); margin-top: 24px; padding: 12px 16px;
+  background: #3A1800; border: 1.5px solid var(--cone); border-radius: 14px;
+  font-weight: 600; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.35; color: var(--cone);
+}
+.warning-icon { flex: none; width: 24px; height: 24px; }
 
 /* ---------- Call to action: a lamp overhead, the night beyond ---------- */
 .closer {
@@ -248,9 +260,9 @@ h1, h2, p, figure { margin: 0; }
 
 /* Phones: the field on its own line, the button under it, both full width. The field stays at 17px so iOS doesn't zoom. */
 @media (max-width: 640px) {
-  .waitlist-row { flex-direction: column; gap: 6px; }
-  .waitlist-email { flex: none; width: auto; min-height: 54px; padding: 0 16px; font-size: 17px; text-align: center; }
-  .waitlist-join { min-height: 54px; padding: 0 20px; font-size: 18px; }
+  .waitlist-row { flex-direction: column; gap: 10px; padding: 10px; }
+  .waitlist-email { flex: none; width: auto; min-height: 56px; padding: 0 16px; font-size: 17px; text-align: center; }
+  .waitlist-join { min-height: 58px; padding: 0 20px; font-size: 18px; }
 }
 
 /* ---------- Footer ---------- */
@@ -275,18 +287,26 @@ h1, h2, p, figure { margin: 0; }
 
 /* ---------- Narrow screens ---------- */
 @media (max-width: 900px) {
+  /* The hero's spacing, in one place (founder, 2026-11-06: "needs MORE breathing room"): wide side margins, about 48 px between
+     its blocks (title, clip, words, waitlist), about 30 px between the lines inside the words. */
   .hero {
-    grid-template-columns: 1fr; min-height: auto; padding-top: 84px; gap: 28px;
+    grid-template-columns: 1fr; min-height: auto; padding-top: 112px; padding-inline: clamp(20px, 7vw, 56px); gap: clamp(44px, 12.5vw, 64px);
     background:
       radial-gradient(90% 40% at 10% 0%, rgba(var(--lamp), .17), rgba(var(--lamp), .06) 45%, rgba(var(--lamp), 0) 78%),
       linear-gradient(180deg, var(--lawn-top), var(--lawn));
   }
   /* One column: the title, centred, then the clip, then the words and the waitlist (founder, 2026-11-06). */
   .hero-copy { display: contents; }
-  .title { order: 1; text-align: center; font-size: clamp(32px, 9.2vw, 52px); }
+  .title { order: 1; text-align: center; font-size: clamp(30px, 9.2vw, 52px); line-height: 1.14; }
   .hero .phone { order: 2; }
-  .support { order: 3; margin-top: 0; }
-  .waitlist { order: 4; margin-top: 0; }
+  /* The words here are big, bold and centred under the clip (founder, 2026-11-06: "stale and timid"), with the taunting in Tennis Ball.
+     The small top margin clears the welcome's tilt, which reaches above its box. */
+  .support { order: 3; margin-top: 8px; justify-self: center; font-size: clamp(21px, 5.9vw, 28px); font-weight: 600; line-height: 1.5; text-align: center; text-wrap: balance; }
+  .welcome { margin-inline: auto; margin-bottom: 28px; transform-origin: center; font-size: clamp(28px, 7.8vw, 40px); line-height: 1.16; }
+  .hit { font-weight: 700; color: var(--ball); }
+  .stake { margin-top: 32px; font-size: clamp(25px, 7vw, 34px); line-height: 1.22; }
+  .hero .waitlist { order: 4; margin-top: 0; justify-self: center; }
+  .hero .soon { justify-content: center; margin-top: 24px; }
   .wanted {
     grid-template-columns: 1fr; justify-items: center;
     background:
@@ -312,4 +332,9 @@ h1, h2, p, figure { margin: 0; }
   .store { flex: 1 1 0; min-width: 0; padding: 10px 14px; }
   .store-name { font-size: 20px; }
   .store-kicker { font-size: 10px; }
+}
+/* The smallest phones: "Coming soon to" takes its own line, so the slash never hangs at a line's end. */
+@media (max-width: 360px) {
+  .soon { justify-content: center; }
+  .soon-label { width: 100%; text-align: center; }
 }
