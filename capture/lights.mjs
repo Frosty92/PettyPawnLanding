@@ -1,11 +1,15 @@
-// The second section's clip (founder, 2026-11-04; PettyPawn/docs/exec-plans/active/2026-11-04_landing-demo-videos-round-two.md): frosty's
-// Slappy Happy up to ×5, then LightsOut with the founder's line glowing on the dark board, zaki (you) v frosty, one continuous game from
-// /studio-combat?demo=lights (PettyPawn/src/studio/demoFight.ts), with no zooms. zaki plays on in the dark, and the lights come back
-// before the clip ends. zaki's moves are real input, shown by a fingertip; frosty's are scripted. Every beat is timed from the roll.
+// The second section's clip (founder, 2026-11-04; PettyPawn/docs/exec-plans/completed/2026-11-04_landing-demo-videos-round-two.md): frosty's
+// Slappy Happy up to ×5, then Dimwit (LightsOut when first filmed) with the founder's line glowing on the dimmed board, zaki (you) v frosty,
+// one continuous game from /studio-combat?demo=lights (PettyPawn/src/studio/demoFight.ts), with no zooms. zaki plays on in the dark, and
+// the lights come back before the clip ends. zaki's moves are real input, shown by a fingertip; frosty's are scripted. Every beat is
+// timed from the roll. Filmed in Twilight (THEME in take.mjs), 2026-11-12.
+
 import { take, poster, shot, sleep } from './take.mjs';
 import { showTouches, moveBy, learnBoard } from './finger.mjs';
 
-const CUT = Number(process.env.CUT ?? 16.8);
+// The board is lit again by 15.8. A take ends on its last new frame, so with a cut at 16.8 its length hung on whether zaki's
+// clock ticked before the cut (17.6 s) or after it (16.7 s, the first take). Cut at 15.9: 16.7 s with the held beat, every time.
+const CUT = Number(process.env.CUT ?? 15.9);
 const SLOW = { look: 420, slide: 420 };
 const LINE = 'Why play fast when you can’t think fast?';
 const DEBUG = process.env.DEBUG ? (app, n) => shot(app, `${process.env.SCRATCH}/dbg-lights-${n}.jpg`, 60) : async () => {};
